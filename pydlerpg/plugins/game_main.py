@@ -21,6 +21,8 @@ class GamePlugin(SignalHookMixin, TickHookMixin, PydleGamePlugin):
         self.hook_signal('game:user:level', self._handle_user_level)
         self.hook_signal('game:user:penalize', self._handle_user_penalize)
         self.every(1, self._handle_ttl_ticks)
+        # sync every 10 seconds (not ticks)
+        self.every(10, self.raise_signal, 'core:sync', tick=False)
 
     def _handle_user_level(self, user):
         user.level += 1
@@ -35,7 +37,7 @@ class GamePlugin(SignalHookMixin, TickHookMixin, PydleGamePlugin):
         for user in self.bot.state.users.values():
             if user.online:
                 user.ttl -= 1
-                log.msg('{0.name} {0.ttl}'.format(user))
+                # log.msg('{} {}'.format(user.name, user.ttl))
                 if user.ttl == 0:
                     self.raise_signal('game:user:level', user)
 

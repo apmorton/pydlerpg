@@ -117,6 +117,6 @@ class PydleIRCBot(irc.IRCClient, object):
             return
 
         nicklist = self._namescallback[channel]
-        self.bot.raise_signal('irc:chan:nicks', channel, nicklist)
+        self.bot.raise_signal('irc:chan:names', channel, nicklist)
 
-        self._namescallback.remove(channel)
+        self._namescallback.pop(channel, None)

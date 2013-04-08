@@ -1,5 +1,6 @@
 import shelve
 
+from twisted.internet import reactor
 from twisted.python import log
 
 from pydlerpg import util
@@ -15,6 +16,8 @@ class PydleBot(object):
         self.signals = {}
         self.namespaces = {}
         self.plugins = {}
+
+        self.hook_signal('core:sync', self.sync_state)
 
     @property
     def state(self):
@@ -114,9 +117,9 @@ class PydleBot(object):
             return
 
         log.msg('signal raised: {}'.format(signal))
-        # TODO deferred
+
         for handler in handlers:
-            handler(*args, **kwargs)
+            reactor.callLater(0, handler, *args, **kwargs)
 
         for handler in nshandlers:
-            handler(signal, *args, **kwargs)
+            reactor.callLater(0, handler, signal, *args, **kwargs)

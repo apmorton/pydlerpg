@@ -20,7 +20,7 @@ class PydleUserState(StateDict):
         online=True,
         last_login=None,
         date_registered=None,
-        ttl=6000,
+        ttl=600,
         level=0
     )
 

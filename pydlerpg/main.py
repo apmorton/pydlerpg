@@ -32,3 +32,5 @@ if __name__ == '__main__':
     log.msg("Connecting to {}/{}".format(host, port))
     reactor.connectTCP(host, port, f)
     reactor.run()
+
+    bot.sync_state()

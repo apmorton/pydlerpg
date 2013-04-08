@@ -17,6 +17,4 @@ class ConfigDict(DefaultsMixin, RequiredsMixin, AttrDict):
         additional_channels=list,
         tick_interval=1.0,
         msg_length=400,
-        ttl_base=600,
-        ttl_factor=1.16,
     )

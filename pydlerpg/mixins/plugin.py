@@ -51,9 +51,9 @@ class TickHookMixin(object):
         if not self.__lcs:
             self.__lcs = []
 
+        tick = kwargs.pop('tick', True)
         call = LoopingCall(f, *args, **kwargs)
 
-        tick = kwargs.pop('tick', True)
         if tick:
             call.clock = self.bot.tick
 

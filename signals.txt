@@ -9,7 +9,9 @@ irc:* represents all signals related to irc events
 
 here is a list of known signals
 
-irc:chan:nicks - called with channel name and list of nicknames
+irc:chan:names - called with channel name and list of nicknames
+
+core:sync - sync all state to disk
 
 game:chan:join - called when the bot joins the game channel
 
