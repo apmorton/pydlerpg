@@ -1,0 +1,23 @@
+signals are events raised by various parts of the code and then handled by others
+signals are identified by a unique string name
+signals are not pre-defined or strictly set
+signals are 'created' when they are first hooked
+
+signals are generally namespaced with colons (:)
+game:* represents all signals related to the game
+irc:* represents all signals related to irc events
+
+here is a list of known signals
+
+irc:chan:nicks - called with channel name and list of nicknames
+
+game:chan:join - called when the bot joins the game channel
+
+game:user:level - called with a user object when the user has leveled up
+game:user:penalize - called when a user has time added to their clock
+
+game:user:nick - called with a user object when the user changes nicks
+game:user:part - called with a user object when the user leaves the game
+game:user:quit - called with a user object when the user quits irc
+game:user:kick - called with a user object when the user is kicked
+game:user:spoke - called with a user object and message when the user speaks

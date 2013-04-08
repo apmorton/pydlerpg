@@ -1,4 +1,5 @@
-from pydlerpg.util import AttrDict, DefaultsMixin, RequiredsMixin
+from pydlerpg.mixins.attrdict import AttrDict, DefaultsMixin, RequiredsMixin
+
 
 class ConfigDict(DefaultsMixin, RequiredsMixin, AttrDict):
     """AttrDict with defaults and requireds"""
@@ -7,7 +8,7 @@ class ConfigDict(DefaultsMixin, RequiredsMixin, AttrDict):
         servers=list,
         admins=dict,
         state=basestring,
-        plugins=list,
+        plugins=dict,
     )
 
     _defaults = dict(
@@ -15,4 +16,7 @@ class ConfigDict(DefaultsMixin, RequiredsMixin, AttrDict):
         channel='#PydleRPG',
         additional_channels=list,
         tick_interval=1.0,
+        msg_length=400,
+        ttl_base=600,
+        ttl_factor=1.16,
     )

@@ -1,5 +1,22 @@
 from inspect import isclass
 
+
+class AttrDict(dict):
+    """Dictionary that allows attribute access"""
+
+    def __getattr__(self, name):
+        try:
+            return self[name]
+        except KeyError:
+            raise AttributeError
+
+    def __setattr__(self, name, value):
+        try:
+            super(AttrDict, self).__setattr__(name, value)
+        except AttributeError:
+            self[name] = value
+
+
 class DefaultsMixin(object):
     """Mixin to initialize default values for a dictionary"""
 
@@ -11,8 +28,9 @@ class DefaultsMixin(object):
             self.update(self._defaults)
 
             # create instances of any classes referenced in defaults
-            for k,v in ((k,v) for (k,v) in self._defaults.items() if isclass(v)):
-                self[k] = v()
+            for k, v in self._defaults.iteritems():
+                if isclass(v):
+                    self[k] = v()
 
         super(DefaultsMixin, self).__init__(*args, **kwargs)
 
@@ -26,7 +44,7 @@ class RequiredsMixin(object):
         super(RequiredsMixin, self).__init__(*args, **kwargs)
 
         if self._requireds is not None:
-            for attr,type_ in self._requireds.items():
+            for attr, type_ in self._requireds.items():
                 try:
                     val = self[attr]
                     if not isinstance(val, type_):
