@@ -1,0 +1,14 @@
+nickname: "PydleRPG"
+channel: "#pydlerpg"
+state: "bot.state"
+tick_interval: 1
+servers:
+  - "irc.network.com/6667"
+  - "irc2.network.com/6667"
+admins:
+  NickName: "*!Ident@host.com"
+plugins:
+  "game:main":
+  "irc:main":
+  "irc:auto-join":
+  "irc:chatter":
